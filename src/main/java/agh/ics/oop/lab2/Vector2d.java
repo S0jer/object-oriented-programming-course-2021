@@ -1,5 +1,7 @@
 package agh.ics.oop.lab2;
 
+import java.util.Objects;
+
 public class Vector2d {
     public final int x;
     public final int y;
@@ -11,62 +13,59 @@ public class Vector2d {
 
 
     @Override
-    public String toString(){
-        return "(" + String.valueOf(this.x) + ", " + String.valueOf(this.y) + ")";
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
     }
 
-    public boolean precedes(Vector2d other){
+    public boolean precedes(Vector2d other) {
         return other.x <= this.x && other.y <= this.y;
     }
 
-    public boolean follows(Vector2d other){
+    public boolean follows(Vector2d other) {
         return other.x >= this.x && other.y >= this.y;
     }
 
 
-    public Vector2d upperRight(Vector2d other){
-        int X;
-        int Y;
+    public Vector2d upperRight(Vector2d other) {
 
-        if (other.x > this.x){
-            X = other.x;
-        } else X = this.x;
+        int a = Math.max(other.x, this.x);
 
-        if (other.y >  this.y){
-            Y = other.y;
-        } else Y = this.y;
+        int b = Math.max(other.y, this.y);
 
-        return  new Vector2d(X, Y);
+        return new Vector2d(a, b);
     }
 
-    public Vector2d lowerLeft(Vector2d other){
-        int X;
-        int Y;
+    public Vector2d lowerLeft(Vector2d other) {
 
-        if (other.x < this.x){
-            X = other.x;
-        } else X = this.x;
+        int a = Math.min(other.x, this.x);
 
-        if (other.y <  this.y){
-            Y = other.y;
-        } else Y = this.y;
+        int b = Math.min(other.y, this.y);
 
-        return  new Vector2d(X, Y);
+        return new Vector2d(a, b);
     }
 
-    public Vector2d add(Vector2d other){
+    public Vector2d add(Vector2d other) {
         return new Vector2d((this.x + other.x), (this.y + other.y));
     }
 
-    public Vector2d subtract(Vector2d other){
-        return new Vector2d((this.x - other.x)/2, (this.y - other.x)/2);
+    public Vector2d subtract(Vector2d other) {
+        return new Vector2d((this.x - other.x) / 2, (this.y - other.x) / 2);
     }
 
-    public boolean equals(Object other){
-        return this == other;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector2d vector2d = (Vector2d) o;
+        return this.x == vector2d.x && this.y == vector2d.y;
     }
 
-    public Vector2d opposite(){
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    public Vector2d opposite() {
         return new Vector2d(this.x * (-1), this.y * (-1));
     }
 

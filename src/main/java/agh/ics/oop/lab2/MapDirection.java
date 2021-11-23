@@ -8,63 +8,39 @@ public enum MapDirection {
 
     @Override
     public String toString() {
-        switch (this) {
-            case EAST:
-                return "Wschód";
-            case WEST:
-                return "Zachód";
-            case NORTH:
-                return "Północ";
-            case SOUTH:
-                return "Południe";
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
-        }
+        return switch (this) {
+            case EAST -> "Wschód";
+            case WEST -> "Zachód";
+            case NORTH -> "Północ";
+            case SOUTH -> "Południe";
+        };
     }
 
     public MapDirection next() {
-        switch (this) {
-            case NORTH:
-                return EAST;
-            case EAST:
-                return SOUTH;
-            case SOUTH:
-                return WEST;
-            case WEST:
-                return NORTH;
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
-        }
+        return switch (this) {
+            case NORTH -> EAST;
+            case EAST -> SOUTH;
+            case SOUTH -> WEST;
+            case WEST -> NORTH;
+        };
     }
 
     public MapDirection previous() {
-        switch (this) {
-            case NORTH:
-                return WEST;
-            case EAST:
-                return NORTH;
-            case SOUTH:
-                return EAST;
-            case WEST:
-                return SOUTH;
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
-        }
+        return switch (this) {
+            case NORTH -> WEST;
+            case EAST -> NORTH;
+            case SOUTH -> EAST;
+            case WEST ->SOUTH;
+        };
     }
 
     public Vector2d toUnitVector() {
-        switch (this) {
-            case NORTH:
-                return new Vector2d(0, 1);
-            case SOUTH:
-                return new Vector2d(0, -1);
-            case EAST:
-                return new Vector2d(1, 0);
-            case WEST:
-                return new Vector2d(-1, 0);
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
-        }
+        return switch (this) {
+            case NORTH -> new Vector2d(0, 1);
+            case SOUTH -> new Vector2d(0, -1);
+            case EAST -> new Vector2d(1, 0);
+            case WEST -> new Vector2d(-1, 0);
+        };
     }
 
 }
