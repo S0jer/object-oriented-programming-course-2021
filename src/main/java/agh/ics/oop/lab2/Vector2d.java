@@ -49,7 +49,7 @@ public class Vector2d {
     }
 
     public Vector2d subtract(Vector2d other) {
-        return new Vector2d((this.x - other.x) / 2, (this.y - other.x) / 2);
+        return new Vector2d((this.x - other.x), (this.y - other.y));
     }
 
     @Override
