@@ -4,20 +4,33 @@ import agh.ics.oop.WorldMap;
 import agh.ics.oop.lab2.Vector2d;
 import agh.ics.oop.lab3.Animal;
 
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RectangularMap implements WorldMap {
 
+
     private int width;
     private int height;
-    private Map<> map = new Map() {
-    };
+    private List<List<Animal>> map = new ArrayList<>();
 
+
+
+    public RectangularMap(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
 
 
     @Override
+    public String toString(){
+
+    }
+
+    @Override
     public boolean canMoveTo(Vector2d position) {
-        return false;
+        return map.get(position.x).get(position.y).equals(new Animal());
     }
 
 
@@ -34,7 +47,7 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public Object objectAt(Vector2d position) {
-        return null;
+        return map.get(position.x).get(position.y);
     }
 
 
