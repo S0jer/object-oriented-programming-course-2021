@@ -4,15 +4,14 @@ import agh.ics.oop.WorldMap;
 import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 import agh.ics.oop.lab3.Animal;
-import agh.ics.oop.lab2.MapDirection;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RectangularMap implements WorldMap {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private final List<List<Animal>> map;
 
     public RectangularMap(int width, int height) {
@@ -27,39 +26,29 @@ public class RectangularMap implements WorldMap {
         }
     }
 
+    @Override
     public void moveOnMap(MoveDirection direction, Vector2d vector2d) {
-        switch (direction) {
-            case RIGHT:
-                this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().next());
-                break;
-            case LEFT:
-                this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().previous());
-                break;
-            case FORWARD:
-                if (0 <= vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x &&
-                        vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x < this.width &&
-                        0 <= vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y &&
-                        vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y < this.height
-                        && this.map.get(vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x)
-                        .get(vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y) == null) {
-
-                    this.map.get(vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x)
-                            .set(vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y, this.map.get(vector2d.x).get(vector2d.y));
-                    this.map.get(vector2d.x).set(vector2d.y, null);
+        if (this.map.get(vector2d.x).get(vector2d.y) != null) {
+            switch (direction) {
+                case RIGHT -> this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().next());
+                case LEFT -> this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().previous());
+                case FORWARD -> {
+                    int fx = vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x;
+                    int fy = vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y;
+                    if (0 <= fx && fx < this.width && 0 <= fy && fy < this.height && this.map.get(fx).get(fy) == null) {
+                        this.map.get(fx).set(fy, this.map.get(vector2d.x).get(vector2d.y));
+                        this.map.get(vector2d.x).set(vector2d.y, null);
+                    }
                 }
-                break;
-            case BACKWARD:
-                if ((0 <= (vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x)) &&
-                        ((vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x) < this.width) &&
-                        (0 <= (vector2d.y - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y)) &&
-                        ((vector2d.y - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y) < this.height)
-                        && this.map.get(vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x)) {
-
-                    this.map.get(vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x)
-                            .set(vector2d.y - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y, this.map.get(vector2d.x).get(vector2d.y));
-                    this.map.get(vector2d.x).set(vector2d.y, null);
+                case BACKWARD -> {
+                    int bx = vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x;
+                    int by = vector2d.y - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y;
+                    if ((0 <= bx) && (bx < this.width) && (0 <= (by) && (by) < this.height) && this.map.get(bx).get(by) == null) {
+                        this.map.get(bx).set(by, this.map.get(vector2d.x).get(vector2d.y));
+                        this.map.get(vector2d.x).set(vector2d.y, null);
+                    }
                 }
-                break;
+            }
         }
 
     }

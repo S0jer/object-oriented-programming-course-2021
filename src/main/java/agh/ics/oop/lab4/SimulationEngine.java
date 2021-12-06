@@ -14,7 +14,7 @@ public class SimulationEngine implements Engine {
     private final WorldMap map;
     private final List<MoveDirection> moveDirections;
     private final Vector2d[] vector2ds;
-    private final List<Animal> animalList = new ArrayList<>();
+    private List<Animal> animalList;
 
     public SimulationEngine(List<MoveDirection> moveDirections, WorldMap map, Vector2d[] vector2ds) {
         this.map = map;
@@ -25,6 +25,7 @@ public class SimulationEngine implements Engine {
 
     private void addToMap() {
         int i = 0;
+        this.animalList = new ArrayList<>();
         for (Vector2d vector2d : this.vector2ds) {
             this.animalList.add(new Animal(vector2d, this.map));
             this.map.place(animalList.get(i));
@@ -37,8 +38,8 @@ public class SimulationEngine implements Engine {
     public void run() {
         int i = 0;
         for (MoveDirection moveDirection : this.moveDirections) {
+            this.map.moveOnMap(moveDirection, this.animalList.get(i % this.animalList.size()).getAnimalPosition());
             this.animalList.get(i % this.animalList.size()).move(moveDirection);
-
             i++;
         }
     }
