@@ -28,7 +28,6 @@ class MapDirectionTest {
         MapDirection result = start.next();
 
         assertEquals(check, result);
-
     }
 
     static Stream<Arguments> previousVerificationArgumentsProvider(){
@@ -47,7 +46,4 @@ class MapDirectionTest {
 
         assertEquals(check, result);
     }
-
-
-
 }

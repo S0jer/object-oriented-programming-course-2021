@@ -49,7 +49,6 @@ class Vector2dTest {
     }
 
 
-
     static Stream<Arguments> toStringVerificationArgumentsProvider() {
         return Stream.of(
                 arguments(1, 1, "(" + 1 + ", " + 1 + ")"),
@@ -90,7 +89,6 @@ class Vector2dTest {
 
         assertEquals(result, check);
     }
-
 
     static Stream<Arguments> precedesVerificationArgumentsProviderFalse() {
         return Stream.of(
@@ -251,7 +249,6 @@ class Vector2dTest {
     }
 
 
-
     static Stream<Arguments> addVerificationArgumentsProviderTrue() {
         return Stream.of(
                 arguments(new Vector2d(1, 1), new Vector2d(1, 2), new Vector2d(2, 3), true),
@@ -311,13 +308,11 @@ class Vector2dTest {
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("subtractVerificationArgumentsProviderTrue")
     void shouldVerifySubtractTrue(Vector2d vector2d_1, Vector2d vector2d_2, Vector2d vector2d_check, boolean check) {
-
         Vector2d vector2d_connected = vector2d_1.subtract(vector2d_2);
 
         boolean result = vector2d_check.equals(vector2d_connected);
 
         assertEquals(result, check);
-
     }
 
 
@@ -357,13 +352,11 @@ class Vector2dTest {
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("oppositeVerificationArgumentsProviderTrue")
     void shouldVerifyOppositeTrue(Vector2d vector2d_1, Vector2d vector2d_check, boolean check) {
-
         Vector2d vector2d_op = vector2d_1.opposite();
 
         boolean result = vector2d_check.equals(vector2d_op);
 
         assertEquals(result, check);
-
     }
 
 
@@ -388,6 +381,4 @@ class Vector2dTest {
         assertEquals(result, check);
 
     }
-
-
 }

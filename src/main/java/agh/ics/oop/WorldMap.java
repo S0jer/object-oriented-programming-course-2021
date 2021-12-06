@@ -5,6 +5,8 @@ import agh.ics.oop.lab3.Animal;
 
 public interface WorldMap {
 
+    String toString(WorldMap map);
+
     boolean canMoveTo(Vector2d position);
 
     boolean place(Animal animal);

@@ -1,8 +1,10 @@
 package agh.ics.oop.lab3;
 
+import agh.ics.oop.WorldMap;
 import agh.ics.oop.lab2.MapDirection;
 import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
+import agh.ics.oop.lab4.RectangularMap;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -144,7 +146,8 @@ class AnimalTest {
     }
 
     static Animal AnimalCreator(int x, int y, MapDirection direction) {
-        Animal animal = new Animal();
+        WorldMap map = new RectangularMap(4, 4);
+        Animal animal = new Animal(map);
 
         animal.setAnimalPosition(new Vector2d(x, y));
         animal.setOrientation(direction);

@@ -6,15 +6,10 @@ import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 
 public class Animal {
-
     private MapDirection orientation = MapDirection.NORTH;
-    private Vector2d animalPosition = new Vector2d(2, 2);
-    private final Vector2d bottomBorder = new Vector2d(0, 0);
-    private final Vector2d upperBorder = new Vector2d(4, 4);
-    private WorldMap map;
+    private Vector2d animalPosition;
+    private final WorldMap map;
 
-    public Animal() {
-    }
 
     public Animal(WorldMap map) {
         this.map = map;
@@ -37,6 +32,8 @@ public class Animal {
 
     public boolean isAt(Vector2d position) {
         return (position.x == animalPosition.x && position.y == animalPosition.y);
+
+
     }
 
 
@@ -49,16 +46,12 @@ public class Animal {
                 this.orientation = this.orientation.previous();
                 break;
             case FORWARD:
-                if (upperBorder.precedes(this.animalPosition.add(this.orientation.toUnitVector()))
-                        && bottomBorder.follows(this.animalPosition.add(this.orientation.toUnitVector()))
-                        && map.canMoveTo(this.animalPosition.add(this.orientation.toUnitVector()))) {
+                if (map.canMoveTo(this.animalPosition.add(this.orientation.toUnitVector()))) {
                     this.animalPosition = this.animalPosition.add(this.orientation.toUnitVector());
                 }
                 break;
             case BACKWARD:
-                if (bottomBorder.follows(this.animalPosition.subtract(this.orientation.toUnitVector()))
-                        && upperBorder.precedes(this.animalPosition.subtract(this.orientation.toUnitVector()))
-                && map.canMoveTo(this.animalPosition.subtract(this.orientation.toUnitVector()))) {
+                if (map.canMoveTo(this.animalPosition.subtract(this.orientation.toUnitVector()))) {
                     this.animalPosition = this.animalPosition.subtract(this.orientation.toUnitVector());
                 }
                 break;
@@ -66,22 +59,12 @@ public class Animal {
 
     }
 
-
-
     public MapDirection getOrientation() {
         return orientation;
     }
 
     public Vector2d getAnimalPosition() {
         return animalPosition;
-    }
-
-    public Vector2d getBottomBorder() {
-        return bottomBorder;
-    }
-
-    public Vector2d getUpperBorder() {
-        return upperBorder;
     }
 
     public void setOrientation(MapDirection orientation) {
