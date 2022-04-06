@@ -10,6 +10,7 @@ import agh.ics.oop.lab4.MapVisualizer;
 import agh.ics.oop.lab4.MyFrame;
 import agh.ics.oop.lab4.RectangularMap;
 import agh.ics.oop.lab4.SimulationEngine;
+import agh.ics.oop.lab5.GrassField;
 
 import java.awt.EventQueue;
 
@@ -22,19 +23,19 @@ public class World extends OptionsParser {
         List<MoveDirection> directions = new OptionsParser().parse(arguments);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
 
-        WorldMap map = new RectangularMap(10, 5);
+        WorldMap map = new GrassField(10);
         Engine enegine = new SimulationEngine(directions, map, positions);
         System.out.println(map.toString(map));
         enegine.run();
         System.out.println(map.toString(map));
 
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MyFrame(10, 6, directions, positions);
-            }
-        });
+//        EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new MyFrame(10, 6, directions, positions);
+//            }
+//        });
 
     }
 }

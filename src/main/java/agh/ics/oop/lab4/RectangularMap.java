@@ -7,45 +7,43 @@ import agh.ics.oop.lab3.Animal;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RectangularMap implements WorldMap {
     private final int width;
     private final int height;
-    private final List<List<Animal>> map;
+    private final Map<Vector2d, Animal> animalMap;
 
     public RectangularMap(int width, int height) {
         this.width = width;
         this.height = height;
-        this.map = new ArrayList<>(width);
-        for (int j = 0; j < width; j++) {
-            this.map.add(j, new ArrayList<>(height));
-            for (int i = 0; i < height; i++) {
-                this.map.get(j).add(null);
-            }
-        }
+        this.animalMap = new HashMap<Vector2d, Animal>();
     }
 
     @Override
     public void moveOnMap(MoveDirection direction, Vector2d vector2d) {
-        if (this.map.get(vector2d.x).get(vector2d.y) != null) {
+        if (this.animalMap.get(vector2d) != null) {
             switch (direction) {
-                case RIGHT -> this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().next());
-                case LEFT -> this.map.get(vector2d.x).get(vector2d.y).setOrientation(this.map.get(vector2d.x).get(vector2d.y).getOrientation().previous());
+                case RIGHT -> this.animalMap.get(vector2d).setOrientation(this.animalMap.get(vector2d).getOrientation().next());
+                case LEFT -> this.animalMap.get(vector2d).setOrientation(this.animalMap.get(vector2d).getOrientation().previous());
                 case FORWARD -> {
-                    int fx = vector2d.x + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x;
-                    int fy = vector2d.y + this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y;
-                    if (0 <= fx && fx < this.width && 0 <= fy && fy < this.height && this.map.get(fx).get(fy) == null) {
-                        this.map.get(fx).set(fy, this.map.get(vector2d.x).get(vector2d.y));
-                        this.map.get(vector2d.x).set(vector2d.y, null);
+                    int fx = vector2d.x + this.animalMap.get(vector2d).getOrientation().toUnitVector().x;
+                    int fy = vector2d.y + this.animalMap.get(vector2d).getOrientation().toUnitVector().y;
+                    Vector2d newVec = new Vector2d(fx, fy);
+                    if (0 <= fx && 0 <= fy && this.animalMap.get(newVec) == null) {
+                        this.animalMap.put(newVec, this.animalMap.get(vector2d));
+                        this.animalMap.remove(vector2d);
                     }
                 }
                 case BACKWARD -> {
-                    int bx = vector2d.x - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().x;
-                    int by = vector2d.y - this.map.get(vector2d.x).get(vector2d.y).getOrientation().toUnitVector().y;
-                    if ((0 <= bx) && (bx < this.width) && (0 <= (by) && (by) < this.height) && this.map.get(bx).get(by) == null) {
-                        this.map.get(bx).set(by, this.map.get(vector2d.x).get(vector2d.y));
-                        this.map.get(vector2d.x).set(vector2d.y, null);
+                    int fx = vector2d.x - this.animalMap.get(vector2d).getOrientation().toUnitVector().x;
+                    int fy = vector2d.y - this.animalMap.get(vector2d).getOrientation().toUnitVector().y;
+                    Vector2d newVec = new Vector2d(fx, fy);
+                    if (0 <= fx && 0 <= fy && this.animalMap.get(newVec) == null) {
+                        this.animalMap.put(newVec, this.animalMap.get(vector2d));
+                        this.animalMap.remove(vector2d);
                     }
                 }
             }
@@ -55,8 +53,8 @@ public class RectangularMap implements WorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        if (0 <= position.x && position.x < this.width && 0 <= position.y && position.y < this.height) {
-            Animal animal = map.get(position.x).get(position.y);
+        if (0 <= position.x && 0 <= position.y ) {
+            Animal animal = animalMap.get(position);
             return animal == null;
         }
         return false;
@@ -66,7 +64,7 @@ public class RectangularMap implements WorldMap {
     public boolean place(Animal animal) {
         Vector2d animalPosition = animal.getAnimalPosition();
         if (canMoveTo(animalPosition)) {
-            this.map.get(animal.getAnimalPosition().x).add(animal.getAnimalPosition().y, animal);
+            this.animalMap.put(animal.getAnimalPosition(), animal);
             return true;
         } else {
             return false;
@@ -76,14 +74,14 @@ public class RectangularMap implements WorldMap {
     @Override
     public boolean isOccupied(Vector2d position) {
         if (0 <= position.x && position.x < width && 0 <= position.y && position.y < height) {
-            return map.get(position.x).get(position.y) != null;
+            return animalMap.get(position) != null;
         }
         return false;
     }
 
     @Override
     public Object objectAt(Vector2d position) {
-        return map.get(position.x).get(position.y);
+        return animalMap.get(position);
     }
 
     @Override
