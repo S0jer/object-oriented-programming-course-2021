@@ -38,7 +38,7 @@ public class SimulationEngine implements Engine {
     public void run() {
         int i = 0;
         for (MoveDirection moveDirection : this.moveDirections) {
-            this.map.moveOnMap(moveDirection, this.animalList.get(i % this.animalList.size()).getAnimalPosition());
+            this.map.moveOnMap(moveDirection, this.animalList.get(i % this.animalList.size()).getPosition());
             this.animalList.get(i % this.animalList.size()).move(moveDirection);
             i++;
         }

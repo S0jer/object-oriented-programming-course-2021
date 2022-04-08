@@ -1,8 +1,9 @@
 package agh.ics.oop.lab5;
 
+import agh.ics.oop.MapElement;
 import agh.ics.oop.lab2.Vector2d;
 
-public class Grass {
+public class Grass implements MapElement {
 
     private Vector2d grassPosition;
 
@@ -10,7 +11,8 @@ public class Grass {
         this.grassPosition = vector2d;
     }
 
-    public Vector2d getGrassPosition() {
+    @Override
+    public Vector2d getPosition() {
         return grassPosition;
     }
 

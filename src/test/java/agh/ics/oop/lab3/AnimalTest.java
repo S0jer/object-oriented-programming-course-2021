@@ -131,6 +131,7 @@ class AnimalTest {
     @MethodSource("borderAndMovesArgumentsProvider")
     void shouldTestBorderAndMoves(Animal animal, List<MoveDirection> path, Vector2d endPosition, MapDirection endOrientation, boolean check) {
         Animal afterMovesAnimal = doPath(animal, path);
+        System.out.println(afterMovesAnimal.getPosition());
 
         boolean result = (afterMovesAnimal.isAt(endPosition) && afterMovesAnimal.getOrientation().equals(endOrientation));
 

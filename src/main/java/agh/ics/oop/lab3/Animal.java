@@ -1,11 +1,14 @@
 package agh.ics.oop.lab3;
 
+import agh.ics.oop.MapElement;
 import agh.ics.oop.WorldMap;
 import agh.ics.oop.lab2.MapDirection;
 import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 
-public class Animal {
+import java.util.Map;
+
+public class Animal implements MapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d animalPosition;
     private final WorldMap map;
@@ -36,7 +39,6 @@ public class Animal {
 
     }
 
-
     public void move(MoveDirection direction) {
         switch (direction) {
             case RIGHT:
@@ -63,7 +65,8 @@ public class Animal {
         return orientation;
     }
 
-    public Vector2d getAnimalPosition() {
+    @Override
+    public Vector2d getPosition() {
         return animalPosition;
     }
 
