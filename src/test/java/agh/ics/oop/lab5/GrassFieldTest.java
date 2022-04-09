@@ -44,7 +44,7 @@ public class GrassFieldTest {
 
     @Test
     void shouldCheckIfPlaceIsOccupiedFalse() {
-        WorldMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(0);
 
         boolean result = map.isOccupied(new Vector2d(2, 2));
 
@@ -53,12 +53,13 @@ public class GrassFieldTest {
 
     @Test
     void shouldCheckIfPlaceIsOccupiedTrue() {
-        WorldMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(15);
         String[] args = {"l", "l"};
         List<MoveDirection> directions = new OptionsParser().parse(args);
         Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
         Engine engine = new SimulationEngine(directions, map, positions);
         engine.run();
+
         boolean result = map.isOccupied(new Vector2d(2, 2));
 
         assertThat(result).isTrue();
@@ -66,7 +67,7 @@ public class GrassFieldTest {
 
     @Test
     void shouldReturnFalseWhenIdexOutsideOfMap() {
-        RectangularMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(0);
 
         boolean result = map.isOccupied(new Vector2d(-1, -1));
 
@@ -77,22 +78,16 @@ public class GrassFieldTest {
 
     @Test
     void shouldCheckWhichObjectIsOnTheXYInstanceOfMap() {
-        WorldMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(0);
 
-        assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(new RectangularMap(4, 4)));
+        assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(map));
     }
 
-    @Test
-    void shouldCheckWhichObjectIsOnTheXYInstanceOfMap2() {
-        WorldMap map = new RectangularMap(5, 5);
-
-        assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(new RectangularMap(4, 4)));
-    }
 
 
     @Test
     void shouldBeAbleToPlaceAnimaInEmptyMap() {
-        WorldMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(1);
         Animal animal = new Animal(new Vector2d(2, 2), map);
 
         map.place(animal);
@@ -103,7 +98,7 @@ public class GrassFieldTest {
 
     @Test
     void shouldntBeAbleToPlaceAnimaInMap() {
-        WorldMap map = new RectangularMap(5, 5);
+        WorldMap map = new GrassField(5);
         Animal animal = new Animal(new Vector2d(2, 2), map);
 
         map.place(animal);
@@ -111,4 +106,5 @@ public class GrassFieldTest {
 
         assertThat(result).isFalse();
     }
+
 }

@@ -54,7 +54,7 @@ public abstract class AbstractWorldMap implements WorldMap {
             this.animalMap.put(animalPos, animal);
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Can not add " + animal);
     }
 
     @Override

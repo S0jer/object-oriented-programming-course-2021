@@ -1,16 +1,20 @@
 package agh.ics.oop.lab3;
 
 import agh.ics.oop.MapElement;
+import agh.ics.oop.PositionChangeObserver;
 import agh.ics.oop.WorldMap;
 import agh.ics.oop.lab2.MapDirection;
 import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class Animal implements MapElement {
+public class Animal implements MapElement, PositionChangeObserver {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d animalPosition;
+    private List<PositionChangeObserver> observers = new ArrayList<>();
     private final WorldMap map;
 
 
@@ -41,22 +45,20 @@ public class Animal implements MapElement {
 
     public void move(MoveDirection direction) {
         switch (direction) {
-            case RIGHT:
-                this.orientation = this.orientation.next();
-                break;
-            case LEFT:
-                this.orientation = this.orientation.previous();
-                break;
-            case FORWARD:
+            case RIGHT -> this.orientation = this.orientation.next();
+            case LEFT -> this.orientation = this.orientation.previous();
+            case FORWARD -> {
                 if (map.canMoveTo(this.animalPosition.add(this.orientation.toUnitVector()))) {
+                    positionChanged(this.animalPosition, this.animalPosition.add(this.orientation.toUnitVector()));
                     this.animalPosition = this.animalPosition.add(this.orientation.toUnitVector());
                 }
-                break;
-            case BACKWARD:
+            }
+            case BACKWARD -> {
                 if (map.canMoveTo(this.animalPosition.subtract(this.orientation.toUnitVector()))) {
+                    positionChanged(this.animalPosition, this.animalPosition.subtract(this.orientation.toUnitVector()));
                     this.animalPosition = this.animalPosition.subtract(this.orientation.toUnitVector());
                 }
-                break;
+            }
         }
 
     }
@@ -79,4 +81,20 @@ public class Animal implements MapElement {
     }
 
 
+    public void positionChanged(Vector2d oldV, Vector2d newV){
+        for (PositionChangeObserver o : this.observers ) {
+            o.positionChanged(oldV, newV);
+        }
+    }
+
+    @Override
+    public void addObserver(PositionChangeObserver observer) {
+        this.observers.add(observer);
+
+    }
+
+    @Override
+    public void removeObserver(PositionChangeObserver observer) {
+        this.observers.remove(observer);
+    }
 }

@@ -6,6 +6,7 @@ import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 import agh.ics.oop.lab3.Animal;
 import agh.ics.oop.lab3.OptionsParser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -63,7 +64,7 @@ class RectangularMapTest {
 
     @Test
     void shouldReturnFalseWhenIdexOutsideOfMap() {
-        RectangularMap map = new RectangularMap(5, 5);
+        WorldMap map = new RectangularMap(5, 5);
 
         boolean result = map.isOccupied(new Vector2d(-1, -1));
 
@@ -104,9 +105,10 @@ class RectangularMapTest {
         Animal animal = new Animal(new Vector2d(2, 2), map);
 
         map.place(animal);
-        boolean result = map.place(animal);
 
-        assertThat(result).isFalse();
+        Assertions.assertThrows(IllegalArgumentException.class,() -> map.place(animal));
+
+
     }
 
 

@@ -1,10 +1,26 @@
 package agh.ics.oop.lab2;
 
+import agh.ics.oop.lab5.GrassField;
+
 import java.util.Objects;
 
 public class Vector2d {
     public final int x;
     public final int y;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector2d vector2d = (Vector2d) o;
+        return x == vector2d.x && y == vector2d.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 
     public Vector2d(int x, int y) {
         this.x = x;
@@ -52,18 +68,6 @@ public class Vector2d {
         return new Vector2d((this.x - other.x), (this.y - other.y));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vector2d vector2d = (Vector2d) o;
-        return this.x == vector2d.x && this.y == vector2d.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
 
     public Vector2d opposite() {
         return new Vector2d(this.x * (-1), this.y * (-1));
