@@ -9,9 +9,8 @@ import agh.ics.oop.lab2.Vector2d;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class Animal implements MapElement, PositionChangeObserver {
+public class Animal implements MapElement {
     private MapDirection orientation = MapDirection.NORTH;
     private Vector2d animalPosition;
     private List<PositionChangeObserver> observers = new ArrayList<>();
@@ -59,6 +58,7 @@ public class Animal implements MapElement, PositionChangeObserver {
                     this.animalPosition = this.animalPosition.subtract(this.orientation.toUnitVector());
                 }
             }
+            default -> throw new IllegalStateException("Unexpected value: " + direction);
         }
 
     }
@@ -81,19 +81,18 @@ public class Animal implements MapElement, PositionChangeObserver {
     }
 
 
-    public void positionChanged(Vector2d oldV, Vector2d newV){
-        for (PositionChangeObserver o : this.observers ) {
+    public void positionChanged(Vector2d oldV, Vector2d newV) {
+        for (PositionChangeObserver o : this.observers) {
             o.positionChanged(oldV, newV);
         }
     }
 
-    @Override
+
     public void addObserver(PositionChangeObserver observer) {
         this.observers.add(observer);
-
     }
 
-    @Override
+
     public void removeObserver(PositionChangeObserver observer) {
         this.observers.remove(observer);
     }
