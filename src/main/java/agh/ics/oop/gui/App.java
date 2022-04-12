@@ -19,10 +19,10 @@ import java.util.List;
 
 public class App extends Application {
 
-    @Override
-    public void init() throws Exception {
+
+    public void runProgram(String[] arguments) {
         try {
-            String[] arguments = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
+//            String[] arguments = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
             List<MoveDirection> directions = new OptionsParser().parse(arguments);
             Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
             WorldMap map = new GrassField(10);
