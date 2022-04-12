@@ -18,7 +18,6 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
     protected MapBoundary borders;
 
 
-
 //    @Override
 //    public String toString(WorldMap map) {
 //        for (Vector2d key : this.grassMap.keySet()) {
@@ -46,7 +45,6 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
     public String toString(WorldMap map) {
         MapVisualizer mapVisualizer = new MapVisualizer(map);
         return mapVisualizer.draw(borders.botLeft(), borders.topRight());
-
     }
 
     @Override
@@ -107,7 +105,6 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
 //        }
 //    }
 
-
     public void setGrass(int grassFields) {
         Random random = new Random();
         int i = 0;
@@ -120,7 +117,6 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
                 i++;
             }
         }
-
         borders.grassborder(this.grassMap);
     }
 
@@ -137,7 +133,4 @@ public abstract class AbstractWorldMap implements WorldMap, PositionChangeObserv
         this.animalMap.put(newPosition, this.animalMap.get(oldPosition));
         this.animalMap.remove(oldPosition);
     }
-
-
-
 }

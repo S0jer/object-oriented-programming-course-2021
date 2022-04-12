@@ -33,7 +33,6 @@ public class SimulationEngine implements Engine {
         }
     }
 
-
     @Override
     public void run() {
         int i = 0;

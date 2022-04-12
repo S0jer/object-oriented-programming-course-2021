@@ -6,7 +6,6 @@ import agh.ics.oop.lab2.MoveDirection;
 import agh.ics.oop.lab2.Vector2d;
 import agh.ics.oop.lab3.Animal;
 import agh.ics.oop.lab3.OptionsParser;
-import agh.ics.oop.lab4.RectangularMap;
 import agh.ics.oop.lab4.SimulationEngine;
 import org.junit.jupiter.api.Test;
 
@@ -35,12 +34,10 @@ public class GrassFieldTest {
         Engine engine = new SimulationEngine(directions, map, positions);
         engine.run();
 
-
         boolean result = map.canMoveTo(new Vector2d(2, 2));
 
         assertThat(result).isFalse();
     }
-
 
     @Test
     void shouldCheckIfPlaceIsOccupiedFalse() {
@@ -72,18 +69,14 @@ public class GrassFieldTest {
         boolean result = map.isOccupied(new Vector2d(-1, -1));
 
         assertThat(result).isFalse();
-
     }
 
 
     @Test
     void shouldCheckWhichObjectIsOnTheXYInstanceOfMap() {
         WorldMap map = new GrassField(0);
-
         assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(map));
     }
-
-
 
     @Test
     void shouldBeAbleToPlaceAnimaInEmptyMap() {
@@ -91,7 +84,6 @@ public class GrassFieldTest {
         Animal animal = new Animal(new Vector2d(2, 2), map);
 
         map.place(animal);
-
 
         assertThat(map.objectAt(new Vector2d(2, 2))).isEqualToComparingFieldByField(animal);
     }
@@ -106,5 +98,4 @@ public class GrassFieldTest {
 
         assertThat(result).isFalse();
     }
-
 }

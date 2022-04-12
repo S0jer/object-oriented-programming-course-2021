@@ -17,44 +17,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class App extends Application{
+public class App extends Application {
 
     @Override
     public void init() throws Exception {
         try {
             String[] arguments = {"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"};
             List<MoveDirection> directions = new OptionsParser().parse(arguments);
-            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3   , 4)};
+            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
             WorldMap map = new GrassField(10);
             Engine enegine = new SimulationEngine(directions, map, positions);
             enegine.run();
-
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             System.out.println("Wrong code");
         }
     }
 
-
     @Override
     public void start(Stage stage) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/sceneB.fxml"));
         Scene scene = new Scene(root);
         Image icon = new Image("E:\\Kodzenie\\Java\\00lab\\Images\\icon.png");
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
-
-
-//        for (int i = 0; i < 10; i++){
-//            for (int j = 0; j < 10; j++){
-//                gridPane.add(new TilePane(), i, j, 1, 1);
-//
-//            }
-//        }
-
-
     }
-
-
 }

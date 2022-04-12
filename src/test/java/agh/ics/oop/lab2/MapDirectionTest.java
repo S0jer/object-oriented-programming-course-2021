@@ -12,8 +12,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class MapDirectionTest {
 
-
-    static Stream<Arguments> nextVerificationArgumentsProvider(){
+    static Stream<Arguments> nextVerificationArgumentsProvider() {
         return Stream.of(
                 arguments(NORTH, EAST),
                 arguments(EAST, SOUTH),
@@ -24,13 +23,12 @@ class MapDirectionTest {
 
     @ParameterizedTest(name = "should return {2} for direction {1}")
     @MethodSource("nextVerificationArgumentsProvider")
-    void shouldVerifyNext(MapDirection start, MapDirection check){
+    void shouldVerifyNext(MapDirection start, MapDirection check) {
         MapDirection result = start.next();
-
         assertEquals(check, result);
     }
 
-    static Stream<Arguments> previousVerificationArgumentsProvider(){
+    static Stream<Arguments> previousVerificationArgumentsProvider() {
         return Stream.of(
                 arguments(NORTH, WEST),
                 arguments(EAST, NORTH),
@@ -41,9 +39,8 @@ class MapDirectionTest {
 
     @ParameterizedTest(name = "should return {2} for direction {1}")
     @MethodSource("previousVerificationArgumentsProvider")
-    void shouldVerifyPrevious(MapDirection start, MapDirection check){
+    void shouldVerifyPrevious(MapDirection start, MapDirection check) {
         MapDirection result = start.previous();
-
         assertEquals(check, result);
     }
 }

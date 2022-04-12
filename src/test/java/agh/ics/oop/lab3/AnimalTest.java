@@ -17,7 +17,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class AnimalTest {
 
-
     static Stream<Arguments> orientationRightProviderFalse() {
         return Stream.of(
                 arguments(AnimalCreator(2, 2, MapDirection.NORTH), MapDirection.NORTH, false),
@@ -31,12 +30,9 @@ class AnimalTest {
     @MethodSource("orientationRightProviderFalse")
     void shouldTestOrientationRightFalse(Animal animal, MapDirection expected, boolean check) {
         animal.move(MoveDirection.RIGHT);
-
         boolean result = expected.equals(animal.getOrientation());
-
         assertEquals(check, result);
     }
-
 
     static Stream<Arguments> orientationRightProviderTrue() {
         return Stream.of(
@@ -45,7 +41,6 @@ class AnimalTest {
                 arguments(AnimalCreator(2, 2, MapDirection.SOUTH), MapDirection.WEST, true),
                 arguments(AnimalCreator(2, 2, MapDirection.WEST), MapDirection.NORTH, true)
         );
-
     }
 
     @ParameterizedTest(name = "should return {3}")
@@ -66,7 +61,6 @@ class AnimalTest {
                 arguments(AnimalCreator(2, 2, MapDirection.SOUTH), MapDirection.EAST, true),
                 arguments(AnimalCreator(2, 2, MapDirection.WEST), MapDirection.SOUTH, true)
         );
-
     }
 
     @ParameterizedTest(name = "should return {3}")
@@ -87,7 +81,6 @@ class AnimalTest {
                 arguments(AnimalCreator(2, 2, MapDirection.SOUTH), MapDirection.WEST, false),
                 arguments(AnimalCreator(2, 2, MapDirection.WEST), MapDirection.NORTH, false)
         );
-
     }
 
     @ParameterizedTest(name = "should return {3}")
@@ -122,9 +115,7 @@ class AnimalTest {
                 arguments(AnimalCreator(0, 0, MapDirection.WEST), OptionsParser.parse(movesAround), new Vector2d(0, 2), MapDirection.NORTH, true),
                 arguments(AnimalCreator(0, 4, MapDirection.WEST), OptionsParser.parse(movesAround), new Vector2d(0, 3), MapDirection.NORTH, true),
                 arguments(AnimalCreator(4, 0, MapDirection.SOUTH), OptionsParser.parse(movesAround), new Vector2d(2, 0), MapDirection.WEST, true)
-
         );
-
     }
 
     @ParameterizedTest(name = "should return {3}")
@@ -149,7 +140,6 @@ class AnimalTest {
     static Animal AnimalCreator(int x, int y, MapDirection direction) {
         WorldMap map = new RectangularMap(4, 4);
         Animal animal = new Animal(map);
-
         animal.setAnimalPosition(new Vector2d(x, y));
         animal.setOrientation(direction);
 

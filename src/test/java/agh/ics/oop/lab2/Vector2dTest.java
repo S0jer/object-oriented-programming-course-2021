@@ -3,9 +3,7 @@ package agh.ics.oop.lab2;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -24,11 +22,8 @@ class Vector2dTest {
     @MethodSource("equalsVerificationArgumentsProviderTrue")
     void shouldVerifyEqualsTrue(int a, int b, Object check, boolean result) {
         Vector2d vector2dTest = new Vector2d(a, b);
-
         assertEquals(vector2dTest.equals(check), result);
-
     }
-
 
     static Stream<Arguments> equalsVerificationArgumentsProviderFalse() {
         return Stream.of(
@@ -43,11 +38,8 @@ class Vector2dTest {
     @MethodSource("equalsVerificationArgumentsProviderFalse")
     void shouldVerifyEqualsFalse(int a, int b, Object check, boolean result) {
         Vector2d vector2dTest = new Vector2d(a, b);
-
         assertEquals(vector2dTest.equals(check), result);
-
     }
-
 
     static Stream<Arguments> toStringVerificationArgumentsProvider() {
         return Stream.of(
@@ -62,11 +54,8 @@ class Vector2dTest {
     @MethodSource("toStringVerificationArgumentsProvider")
     void shouldVerifyToString(int a, int b, String check) {
         Vector2d vector2dTest = new Vector2d(a, b);
-
         String result = vector2dTest.toString();
-
         assertEquals(result, check);
-
     }
 
 
@@ -84,9 +73,7 @@ class Vector2dTest {
     void shouldVerifyPrecedesTrue(int a, int b, int c, int d, boolean check) {
         Vector2d vector2d = new Vector2d(a, b);
         Vector2d vector2dPrecedes = new Vector2d(c, d);
-
         boolean result = vector2dPrecedes.precedes(vector2d);
-
         assertEquals(result, check);
     }
 
@@ -104,12 +91,9 @@ class Vector2dTest {
     void shouldVerifyPrecedesFalse(int a, int b, int c, int d, boolean check) {
         Vector2d vector2d = new Vector2d(a, b);
         Vector2d vector2dPrecedes = new Vector2d(c, d);
-
         boolean result = vector2dPrecedes.precedes(vector2d);
-
         assertEquals(result, check);
     }
-
 
     static Stream<Arguments> followsVerificationArgumentsProviderTrue() {
         return Stream.of(
@@ -125,9 +109,7 @@ class Vector2dTest {
     void shouldVerifyFollowsTrue(int a, int b, int c, int d, boolean check) {
         Vector2d vector2dFollows = new Vector2d(a, b);
         Vector2d vector2d = new Vector2d(c, d);
-
         boolean result = vector2dFollows.follows(vector2d);
-
         assertEquals(result, check);
     }
 
@@ -146,9 +128,7 @@ class Vector2dTest {
     void shouldVerifyFollowsFalse(int a, int b, int c, int d, boolean check) {
         Vector2d vector2dFollows = new Vector2d(a, b);
         Vector2d vector2d = new Vector2d(c, d);
-
         boolean result = vector2dFollows.follows(vector2d);
-
         assertEquals(result, check);
     }
 
@@ -168,15 +148,10 @@ class Vector2dTest {
         Vector2d vector2d_1 = new Vector2d(a, b);
         Vector2d vector2d_2 = new Vector2d(c, d);
         Vector2d vector2d_check = new Vector2d(check_a, check_b);
-
         Vector2d vector2d_connected = vector2d_1.upperRight(vector2d_2);
-
         boolean result = vector2d_check.equals(vector2d_connected);
-
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> upperRightVerificationArgumentsProviderFalse() {
         return Stream.of(
@@ -193,15 +168,10 @@ class Vector2dTest {
         Vector2d vector2d_1 = new Vector2d(a, b);
         Vector2d vector2d_2 = new Vector2d(c, d);
         Vector2d vector2d_check = new Vector2d(check_a, check_b);
-
         Vector2d vector2d_connected = vector2d_1.upperRight(vector2d_2);
-
         boolean result = vector2d_check.equals(vector2d_connected);
-
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> lowerLeftVerificationArgumentsProviderTrue() {
         return Stream.of(
@@ -212,19 +182,13 @@ class Vector2dTest {
         );
     }
 
-
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("lowerLeftVerificationArgumentsProviderTrue")
     void shouldVerifyLowerLeftTrue(Vector2d vector2d_1, Vector2d vector2d_2, Vector2d vector2d_check, boolean check) {
-
         Vector2d vector2d_connected = vector2d_1.lowerLeft(vector2d_2);
-
         boolean result = vector2d_check.equals(vector2d_connected);
-
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> lowerLeftVerificationArgumentsProviderFalse() {
         return Stream.of(
@@ -235,19 +199,13 @@ class Vector2dTest {
         );
     }
 
-
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("lowerLeftVerificationArgumentsProviderFalse")
     void shouldVerifyLowerLeftFalse(Vector2d vector2d_1, Vector2d vector2d_2, Vector2d vector2d_check, boolean check) {
-
         Vector2d vector2d_connected = vector2d_1.lowerLeft(vector2d_2);
-
         boolean result = vector2d_check.equals(vector2d_connected);
-
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> addVerificationArgumentsProviderTrue() {
         return Stream.of(
@@ -258,19 +216,14 @@ class Vector2dTest {
         );
     }
 
-
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("addVerificationArgumentsProviderTrue")
     void shouldVerifyAddTrue(Vector2d vector2d_1, Vector2d vector2d_2, Vector2d vector2d_check, boolean check) {
 
         Vector2d vector2d_connected = vector2d_1.add(vector2d_2);
-
         boolean result = vector2d_check.equals(vector2d_connected);
-
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> addVerificationArgumentsProviderFalse() {
         return Stream.of(
@@ -281,7 +234,6 @@ class Vector2dTest {
         );
     }
 
-
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("addVerificationArgumentsProviderFalse")
     void shouldVerifyAddFalse(Vector2d vector2d_1, Vector2d vector2d_2, Vector2d vector2d_check, boolean check) {
@@ -291,9 +243,7 @@ class Vector2dTest {
         boolean result = vector2d_check.equals(vector2d_connected);
 
         assertEquals(result, check);
-
     }
-
 
     static Stream<Arguments> subtractVerificationArgumentsProviderTrue() {
         return Stream.of(
@@ -303,7 +253,6 @@ class Vector2dTest {
                 arguments(new Vector2d(12, -2), new Vector2d(15, 2), new Vector2d(-3, -4), true)
         );
     }
-
 
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("subtractVerificationArgumentsProviderTrue")
@@ -315,7 +264,6 @@ class Vector2dTest {
         assertEquals(result, check);
     }
 
-
     static Stream<Arguments> subtractVerificationArgumentsProviderFalse() {
         return Stream.of(
                 arguments(new Vector2d(1, 1), new Vector2d(1, 2), new Vector2d(0, 3), false),
@@ -324,7 +272,6 @@ class Vector2dTest {
                 arguments(new Vector2d(12, -2), new Vector2d(15, 2), new Vector2d(3, 0), false)
         );
     }
-
 
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("subtractVerificationArgumentsProviderFalse")
@@ -335,7 +282,6 @@ class Vector2dTest {
         boolean result = vector2d_check.equals(vector2d_connected);
 
         assertEquals(result, check);
-
     }
 
 
@@ -369,7 +315,6 @@ class Vector2dTest {
         );
     }
 
-
     @ParameterizedTest(name = "should return {4}")
     @MethodSource("oppositeVerificationArgumentsProviderFalse")
     void shouldVerifyOppositeFalse(Vector2d vector2d_1, Vector2d vector2d_check, boolean check) {
@@ -379,6 +324,5 @@ class Vector2dTest {
         boolean result = vector2d_check.equals(vector2d_op);
 
         assertEquals(result, check);
-
     }
 }

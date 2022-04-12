@@ -30,7 +30,7 @@ public enum MapDirection {
             case NORTH -> WEST;
             case EAST -> NORTH;
             case SOUTH -> EAST;
-            case WEST ->SOUTH;
+            case WEST -> SOUTH;
         };
     }
 
@@ -42,5 +42,4 @@ public enum MapDirection {
             case WEST -> new Vector2d(-1, 0);
         };
     }
-
 }

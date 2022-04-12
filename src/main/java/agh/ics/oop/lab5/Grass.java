@@ -17,8 +17,7 @@ public class Grass implements MapElement {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "*";
     }
-
 }

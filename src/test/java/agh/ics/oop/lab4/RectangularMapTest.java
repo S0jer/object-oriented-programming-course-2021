@@ -33,12 +33,10 @@ class RectangularMapTest {
         Engine engine = new SimulationEngine(directions, map, positions);
         engine.run();
 
-
         boolean result = map.canMoveTo(new Vector2d(2, 2));
 
         assertThat(result).isFalse();
     }
-
 
     @Test
     void shouldCheckIfPlaceIsOccupiedFalse() {
@@ -69,24 +67,19 @@ class RectangularMapTest {
         boolean result = map.isOccupied(new Vector2d(-1, -1));
 
         assertThat(result).isFalse();
-
     }
-
 
     @Test
     void shouldCheckWhichObjectIsOnTheXYInstanceOfMap() {
         WorldMap map = new RectangularMap(5, 5);
-
         assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(new RectangularMap(4, 4)));
     }
 
     @Test
     void shouldCheckWhichObjectIsOnTheXYInstanceOfMap2() {
         WorldMap map = new RectangularMap(5, 5);
-
         assertThat(map.objectAt(new Vector2d(2, 2))).isNotEqualTo(new Animal(new RectangularMap(4, 4)));
     }
-
 
     @Test
     void shouldBeAbleToPlaceAnimaInEmptyMap() {
@@ -95,7 +88,6 @@ class RectangularMapTest {
 
         map.place(animal);
 
-
         assertThat(map.objectAt(new Vector2d(2, 2))).isEqualToComparingFieldByField(animal);
     }
 
@@ -103,13 +95,7 @@ class RectangularMapTest {
     void shouldntBeAbleToPlaceAnimaInMap() {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal(new Vector2d(2, 2), map);
-
         map.place(animal);
-
-        Assertions.assertThrows(IllegalArgumentException.class,() -> map.place(animal));
-
-
+        Assertions.assertThrows(IllegalArgumentException.class, () -> map.place(animal));
     }
-
-
 }

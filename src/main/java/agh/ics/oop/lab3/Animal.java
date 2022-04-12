@@ -38,8 +38,6 @@ public class Animal implements MapElement {
 
     public boolean isAt(Vector2d position) {
         return (position.x == animalPosition.x && position.y == animalPosition.y);
-
-
     }
 
     public void move(MoveDirection direction) {
@@ -91,7 +89,6 @@ public class Animal implements MapElement {
     public void addObserver(PositionChangeObserver observer) {
         this.observers.add(observer);
     }
-
 
     public void removeObserver(PositionChangeObserver observer) {
         this.observers.remove(observer);
