@@ -1,3 +1,3 @@
-# Java_start
+# Object Oriented Programming course
 
-# Implementation of lab 1- 8 from https://github.com/apohllo/obiektowe-lab.
+# This repository was made to maintain a project developed throughout each lab from https://github.com/apohllo/obiektowe-lab.
